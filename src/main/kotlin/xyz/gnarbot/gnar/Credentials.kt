@@ -46,5 +46,8 @@ class Credentials(file: File) {
     val malUsername: String? = config["mal credentials", "username"].string
     val malPassword: String? = config["mal credentials", "password"].string
 
+    val riotToken: String? = config["riot", "apikey"].string
+
+
     val discordFM: String? = config["discordfm"].string
 }

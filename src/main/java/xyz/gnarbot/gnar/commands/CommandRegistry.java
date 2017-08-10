@@ -6,6 +6,7 @@ import xyz.gnarbot.gnar.Bot;
 import xyz.gnarbot.gnar.commands.executors.admin.*;
 import xyz.gnarbot.gnar.commands.executors.fun.*;
 import xyz.gnarbot.gnar.commands.executors.games.GameLookupCommand;
+import xyz.gnarbot.gnar.commands.executors.games.LeagueCommand;
 import xyz.gnarbot.gnar.commands.executors.games.OverwatchLookupCommand;
 import xyz.gnarbot.gnar.commands.executors.general.*;
 import xyz.gnarbot.gnar.commands.executors.media.*;
@@ -90,6 +91,7 @@ public class CommandRegistry {
 
         //Game Commands
         register(new OverwatchLookupCommand());
+        register(new LeagueCommand());
 //        register(new PokemonCommand());
         register(new GameLookupCommand());
         //End Game Commands
