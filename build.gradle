@@ -46,7 +46,7 @@ dependencies {
     compile group: 'xyz.avarel.kaiper', name: 'Kaiper-Interpreter', version: '1.1.0'
     compile group: 'xyz.avarel.kaiper', name: 'Kaiper-AST', version: '1.1.0'
     compile group: 'xyz.avarel.kaiper', name: 'Kaiper-Runtime-Lib', version: '1.1.0'
-    compile 'com.github.rithms:riot-api-java:4.0.1'
+    compile group: 'com.github.rithms', name: 'riot-api-java', version: '4.0.1'
 
 
     compile group: 'xyz.avarel', name: 'aljava', version: '0.0.3'
@@ -64,7 +64,7 @@ dependencies {
     // Test dependencies
     testCompile group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit', version: '1.1.3-2'
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    
 }
 
 compileJava.options.encoding = 'UTF-8'
@@ -83,20 +83,5 @@ jar {
 kotlin {
     experimental {
         coroutines "enable"
-    }
-}
-buildscript {
-    ext.kotlin_version = '1.1.3-2'
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-apply plugin: 'kotlin'
-compileTestKotlin {
-    kotlinOptions {
-        jvmTarget = "1.8"
     }
 }
