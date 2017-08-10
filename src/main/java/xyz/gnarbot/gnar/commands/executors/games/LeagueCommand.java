@@ -111,62 +111,31 @@ public class LeagueCommand extends CommandExecutor {
         String action = args[1].toLowerCase();
         String username = args[2].toLowerCase();
 
-        switch (region) {
-            case "na":
+        Platform platform = Platform.getPlatformByName(region);
+
                 switch (action) {
                     case "freetoplay":
-                        freeToPlay(context, Platform.NA);
+                        freeToPlay(context, platform);
                         return;
                     case "currentgame":
                         if (args.length < 2) {
                             CommandDispatcher.INSTANCE.sendHelp(context, getInfo());
                             return;
                         }
-                        currentGame(context, Platform.NA, username);
+                        currentGame(context, platform, username);
                         return;
                     case "lastgame":
                         if (args.length < 2) {
                             CommandDispatcher.INSTANCE.sendHelp(context, getInfo());
                             return;
                         }
-                        lastGame(context, Platform.NA, username);
+                        lastGame(context, platform, username);
                         return;
 
                     default:
                         context.send().error("The currently supported actions are: lastgame, currentgame, freetoplay").queue();
                         return;
-                }
-            case "eune":
-                switch (action) {
-                    case "freetoplay":
-                        freeToPlay(context, Platform.NA);
-                        return;
-                    case "currentgame":
-                        if (args.length < 2) {
-                            CommandDispatcher.INSTANCE.sendHelp(context, getInfo());
-                            return;
-                        }
-                        currentGame(context, Platform.NA, username);
-                        return;
-                    case "lastgame":
-                        if (args.length < 2) {
-                            CommandDispatcher.INSTANCE.sendHelp(context, getInfo());
-                            return;
-                        }
-                        lastGame(context, Platform.NA, username);
-                        return;
-
-                    default:
-                        context.send().error("The currently supported actions are: lastgame, currentgame, freetoplay").queue();
-                        return;
-
-                }
-
-            default:
-                context.send().error("The currently supported regions are: EUNE, NA").queue();
-
         }
-
     }
 }
 
