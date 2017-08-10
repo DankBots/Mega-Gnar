@@ -97,7 +97,9 @@ public final class Bot {
         return malAPI;
     }
 
-    public static RiotApi getRiotAPI() { return riotAPI; }
+    public static RiotApi getRiotAPI() {
+        return riotAPI;   
+    }
 
     public static Database db() {
         return database;
