@@ -5,3 +5,7 @@
 !bot.conf
 
 *.log
+
+.gradle/
+
+build/

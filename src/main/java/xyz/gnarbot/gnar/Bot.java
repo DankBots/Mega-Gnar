@@ -4,6 +4,8 @@ import com.jagrosh.jdautilities.waiter.EventWaiter;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDAInfo;
 import net.dv8tion.jda.core.entities.Game;
+import net.rithms.riot.api.ApiConfig;
+import net.rithms.riot.api.RiotApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.avarel.kaiper.interpreter.GlobalVisitorSettings;
@@ -37,6 +39,10 @@ public final class Bot {
     public static final BotConfiguration CONFIG = new BotConfiguration(new File("bot.conf"));
 
     private static final MyAnimeListAPI malAPI = new MyAnimeListAPI(KEYS.getMalUsername(), KEYS.getMalPassword());
+
+    private static final ApiConfig config = new ApiConfig().setKey(Bot.KEYS.getRiotToken());
+    private static final RiotApi riotAPI= new RiotApi(config);
+
 
     protected static final BotListener botListener = new BotListener();
     protected static final VoiceListener voiceListener = new VoiceListener();
@@ -90,6 +96,8 @@ public final class Bot {
     public static MyAnimeListAPI getMALAPI() {
         return malAPI;
     }
+
+    public static RiotApi getRiotAPI() { return riotAPI; }
 
     public static Database db() {
         return database;
