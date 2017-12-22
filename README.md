@@ -28,9 +28,9 @@ Note that only experienced developers should use or modify the bot.
         dependencies.
 - **Step 4:** Gnar-bot requires RethinkDB in order to setup. The RethinkDB requires a database name that
     can be specified inside `credentials.conf` along with other necessary credentials. The database needs to
-    have 3 tables: `guilds` `keys` `users` in order for the bot to work.
+    have 3 tables: `guilds_v2` `keys` `users` in order for the bot to work.
 - **Step 5:** Once compilation is done, you can run the bot by grabbing the `.jar` file from `build/libs` 
-        and running `java -jar Gnar-bot-1.0-all.jar`.
+        and running `java -jar Gnar-bot-4.8.3-all.jar`.
 
 ## Main Contributors
 * [Avarel](https://github.com/Avarel)
@@ -39,7 +39,7 @@ Note that only experienced developers should use or modify the bot.
 
 ## Dependencies
 * [Kotlin 1.1](https://kotlinlang.org/)
-* [JDA 3.1](https://github.com/DV8FromTheWorld/JDA)
+* [JDA 3.4](https://github.com/DV8FromTheWorld/JDA)
 * [LavaPlayer](https://github.com/sedmelluq/lavaplayer)
 * [Guava](https://github.com/google/guava)
 * [Configurate](https://github.com/zml2008/configurate)
