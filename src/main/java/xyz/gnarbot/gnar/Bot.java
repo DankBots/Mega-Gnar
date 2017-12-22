@@ -37,13 +37,13 @@ public class Bot {
 
     private final Supplier<Configuration> configurationGenerator;
     private final Database database = new Database("bot");
-    private final OptionsRegistry optionsRegistry = new OptionsRegistry(this);
-    private final PlayerRegistry playerRegistry = new PlayerRegistry(this, Executors.newSingleThreadScheduledExecutor());
+    private final OptionsRegistry optionsRegistry;
+    private final PlayerRegistry playerRegistry;
     private final MyAnimeListAPI myAnimeListAPI;
     private final RiotApi riotApi;
-    private final DiscordFM discordFM = new DiscordFM(this);
-    private final CommandRegistry commandRegistry = new CommandRegistry(this);
-    private final CommandDispatcher commandDispatcher = new CommandDispatcher(this, commandRegistry, Executors.newWorkStealingPool());
+    private final DiscordFM discordFM;
+    private final CommandRegistry commandRegistry;
+    private final CommandDispatcher commandDispatcher;
     private final EventWaiter eventWaiter = new EventWaiter();
     private final ShardManager shardManager;
     private final CountUpdater countUpdater;
@@ -58,6 +58,11 @@ public class Bot {
 
         this.configurationGenerator = configurationGenerator;
         reloadConfiguration();
+        optionsRegistry  = new OptionsRegistry(this);
+        playerRegistry  = new PlayerRegistry(this, Executors.newSingleThreadScheduledExecutor());
+        discordFM = new DiscordFM(this);
+        commandRegistry  = new CommandRegistry(this);
+        commandDispatcher  = new CommandDispatcher(this, commandRegistry, Executors.newWorkStealingPool());
 
         LOG.info("Initializing the Discord bot.");
 
