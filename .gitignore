@@ -1,7 +1,11 @@
 .idea/
+build/
+.gradle/
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+*.iml
+rethinkdb_data/
 
 *.conf
-
-!bot.conf
 
 *.log
