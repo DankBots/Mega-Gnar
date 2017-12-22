@@ -71,6 +71,7 @@ public class CommandRegistry {
         register(new TextToBrickCommand());
         register(new TextToSpeechCommand());
         register(new ReactCommand());
+        register(new GoodShitCommand());
         //End Fun Commands
 
         //Mod Commands
