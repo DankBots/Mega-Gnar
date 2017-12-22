@@ -35,6 +35,12 @@ class Credentials(file: File) {
     val webHookID: Long = config["webhook", "id"].long
     val webHookToken: String? = config["webhook", "token"].string
 
+    val databaseAddr: String = config["database", "addr"].string ?: "localhost"
+    val databasePort         = config["database", "port"].getInt(28015)
+    val databaseName: String = config["database", "name"].string ?: "bot"
+    val databaseUser: String? = config["database", "user"].string
+    val databasePass: String? = config["database", "pass"].string
+
     val abal: String? = config["server counts", "abal"].string
     val carbonitex: String? = config["server counts", "carbonitex"].string
     val discordBots: String? = config["server counts", "discordbots"].string

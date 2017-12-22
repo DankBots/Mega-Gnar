@@ -4,8 +4,10 @@ import com.rethinkdb.gen.exc.ReqlDriverError;
 import com.rethinkdb.net.Connection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import xyz.gnarbot.gnar.Credentials;
 import xyz.gnarbot.gnar.guilds.GuildData;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -18,17 +20,23 @@ public class Database {
     private final ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
     private final Connection conn;
 
-    public Database(String name) {
+    public Database(@Nonnull Credentials credentials) {
         Connection conn = null;
         try {
-            Connection.Builder builder = r.connection().hostname("localhost").port(28015);
+            Connection.Builder builder = r.connection()
+                    .hostname(credentials.getDatabaseAddr())
+                    .port(credentials.getDatabasePort());
             // potential spot for authentication
+            if (credentials.getDatabaseUser() != null && credentials.getDatabasePass() != null) {
+                builder.user(credentials.getDatabaseUser(), credentials.getDatabasePass());
+            }
             conn = builder.connect();
-            if (r.dbList().<List<String>>run(conn).contains(name)) {
+            String dbName = credentials.getDatabaseName();
+            if (r.dbList().<List<String>>run(conn).contains(dbName)) {
                 LOG.info("Connected to database.");
-                conn.use(name);
+                conn.use(dbName);
             } else {
-                LOG.info("Rethink Database `" + name + "` is not present. Closing connection.");
+                LOG.info("Rethink Database `" + dbName + "` is not present. Closing connection.");
                 close();
                 System.exit(0);
             }
