@@ -36,7 +36,7 @@ public class Bot {
     private final Credentials credentials;
 
     private final Supplier<Configuration> configurationGenerator;
-    private final Database database = new Database("bot");
+    private final Database database;
     private final OptionsRegistry optionsRegistry;
     private final PlayerRegistry playerRegistry;
     private final MyAnimeListAPI myAnimeListAPI;
@@ -55,6 +55,7 @@ public class Bot {
             Supplier<Configuration> configurationGenerator
     ) throws LoginException {
         this.credentials = credentials;
+         database = new Database(credentials);
 
         this.configurationGenerator = configurationGenerator;
         reloadConfiguration();
