@@ -4,6 +4,7 @@ import javax.security.auth.login.LoginException;
 import java.io.File;
 
 /**
+ *
  * Main bot class.
  *
  * @author Avarel, Xevryll

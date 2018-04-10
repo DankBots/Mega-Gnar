@@ -1,5 +1,6 @@
 package xyz.gnarbot.gnar.music
 
+import com.sedmelluq.discord.lavaplayer.filter.equalizer.EqualizerFactory
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager
@@ -87,6 +88,12 @@ class MusicManager(private val bot: Bot, val guild: Guild, val playerRegistry: P
     /** @return Wrapper around AudioPlayer to use it as an AudioSendHandler. */
     private val sendHandler: AudioPlayerSendHandler = AudioPlayerSendHandler(player)
 
+    /** @return EqualizerFactory for the bassboost functions. */
+    private val equalizer: EqualizerFactory = EqualizerFactory()
+
+    /** @return Boolean for the enable/disable of the EqualizerFactory */
+    private var equalizerEnabled = false
+
     /**
      * @return Voting cooldown.
      */
@@ -113,6 +120,28 @@ class MusicManager(private val bot: Bot, val guild: Guild, val playerRegistry: P
     fun destroy() {
         player.destroy()
         closeAudioConnection()
+    }
+
+    /**
+     * The bassboost function of [xyz.gnarbot.gnar.commands.executors.music.BassBoostCommand]
+     */
+
+    fun bassboost(band0: Float, band1: Float) {
+        equalizer.setGain(0, band0)
+
+        if(!equalizerEnabled) {
+            player.setFilterFactory(equalizer)
+            equalizerEnabled = true
+        }
+    }
+
+    fun disableEqualizer() {
+        if(equalizerEnabled) {
+            equalizer.setGain(0, 0F)
+            equalizer.setGain(1, 0F)
+            player.setFilterFactory(null)
+            equalizerEnabled = false
+        }
     }
 
     fun openAudioConnection(channel: VoiceChannel, context: Context) : Boolean {
