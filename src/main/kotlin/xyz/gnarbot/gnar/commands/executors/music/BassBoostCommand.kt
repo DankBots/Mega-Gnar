@@ -11,7 +11,7 @@ import xyz.gnarbot.gnar.music.MusicManager
 )
 
 @BotInfo(
-     id = 79,
+     id = 100,
      category = Category.MUSIC,
      scope = Scope.VOICE
 )

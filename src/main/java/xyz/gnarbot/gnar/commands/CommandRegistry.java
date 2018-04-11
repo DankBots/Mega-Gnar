@@ -142,6 +142,7 @@ public class CommandRegistry {
             register(new VolumeCommand());
             register(new JumpCommand());
             register(new DiscordFMCommand());
+            register(new BassBoostCommand());
         } else {
             register(new DisabledPlayCommand());
         }
