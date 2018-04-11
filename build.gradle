@@ -2,11 +2,11 @@ plugins {
     id 'java'
     id 'idea'
     id 'application'
-    id 'org.jetbrains.kotlin.jvm' version '1.2.30'
+    id 'org.jetbrains.kotlin.jvm' version '1.2.31'
     id 'com.github.johnrengelman.shadow' version '2.0.2'
 }
 
-String kotlinVersion = '1.2.30'
+String kotlinVersion = '1.2.31'
 
 static String kotlinModule(String module, String version) {
     "org.jetbrains.kotlin:kotlin-$module:$version"
@@ -43,7 +43,7 @@ dependencies {
     // JDA
     compile group: 'net.dv8tion', name: 'JDA', version: '3.5.1_351'
     compile group: 'com.sedmelluq', name: 'jda-nas', version: '1.0.5'
-    compile group: 'com.sedmelluq', name: 'lavaplayer', version: '1.2.56'
+    compile group: 'com.sedmelluq', name: 'lavaplayer', version: '1.2.62'
 
     // Configuration
     compile group: 'ninja.leaping.configurate', name: 'configurate-hocon', version: '3.3'
