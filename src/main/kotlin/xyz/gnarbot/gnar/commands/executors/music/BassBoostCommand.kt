@@ -1,6 +1,8 @@
 package xyz.gnarbot.gnar.commands.executors.music
 
+import org.apache.commons.lang3.StringUtils
 import xyz.gnarbot.gnar.commands.*
+import xyz.gnarbot.gnar.commands.dispatcher.CommandDispatcher
 import xyz.gnarbot.gnar.music.MusicManager
 
 
@@ -16,11 +18,11 @@ import xyz.gnarbot.gnar.music.MusicManager
      scope = Scope.VOICE
 )
 
-class BassBoostCommand : MusicCommandExecutor(true, true){
+class BassBoostCommand : MusicCommandExecutor(true, false){
     override fun execute(context: Context, label: String, args: Array<String>, manager: MusicManager) {
-        val query = args[0]
+        val query = StringUtils.join(args, " ")
 
-        if(query.isEmpty()) {
+        if(query.length == 0) {
             context.send().embed {
                 title { "Bass Boost" }
                 field("Bass Boost Presets", false) {
