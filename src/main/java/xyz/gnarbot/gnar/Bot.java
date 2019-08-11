@@ -3,14 +3,13 @@ package xyz.gnarbot.gnar;
 import com.jagrosh.jdautilities.waiter.EventWaiter;
 import com.patreon.PatreonAPI;
 import com.sedmelluq.discord.lavaplayer.jdaudp.NativeAudioSendFactory;
-import net.dv8tion.jda.bot.sharding.DefaultShardManagerBuilder;
-import net.dv8tion.jda.bot.sharding.ShardManager;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.JDAInfo;
-import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.utils.MiscUtil;
-import net.dv8tion.jda.webhook.WebhookClientBuilder;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDAInfo;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
+import net.dv8tion.jda.api.sharding.ShardManager;
+import net.dv8tion.jda.api.utils.MiscUtil;
 import net.rithms.riot.api.ApiConfig;
 import net.rithms.riot.api.RiotApi;
 import org.slf4j.Logger;
@@ -23,7 +22,10 @@ import xyz.gnarbot.gnar.listeners.BotListener;
 import xyz.gnarbot.gnar.listeners.PatreonListener;
 import xyz.gnarbot.gnar.listeners.VoiceListener;
 import xyz.gnarbot.gnar.music.PlayerRegistry;
-import xyz.gnarbot.gnar.utils.*;
+import xyz.gnarbot.gnar.utils.CountUpdater;
+import xyz.gnarbot.gnar.utils.DiscordFM;
+import xyz.gnarbot.gnar.utils.MyAnimeListAPI;
+import xyz.gnarbot.gnar.utils.SoundManager;
 
 import javax.security.auth.login.LoginException;
 import java.util.concurrent.Executors;
@@ -67,7 +69,6 @@ public class Bot {
         String url = this.credentials.getWebHookURL();
         if (url != null) {
             LOG.info("Connected to Discord web hook.");
-            DiscordLogBack.enable(new WebhookClientBuilder(url).build());
         } else {
             LOG.warn("Not connected to Discord web hook.");
         }
@@ -86,7 +87,7 @@ public class Bot {
                 .setShards(credentials.getShardStart(), credentials.getShardEnd() - 1)
                 .setAudioSendFactory(new NativeAudioSendFactory())
                 .addEventListeners(eventWaiter, new BotListener(this), new VoiceListener(this), new PatreonListener(this))
-                .setGameProvider(i -> Game.playing(String.format(configuration.getGame(), i)))
+                .setActivityProvider(i -> Activity.playing(String.format(configuration.getGame(), i)))
                 .setBulkDeleteSplittingEnabled(false)
                 .build();
 

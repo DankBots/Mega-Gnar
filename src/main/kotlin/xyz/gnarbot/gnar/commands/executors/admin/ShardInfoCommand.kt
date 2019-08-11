@@ -25,7 +25,7 @@ class ShardInfoCommand : CommandExecutor() {
                         "%3d | %9.9s | %7.7s | %6d | %6d | ---- WIP | %3d".format(
                                 it.shardInfo.shardId,
                                 it.status,
-                                "${it.ping}ms",
+                                "${it.gatewayPing}ms",
                                 it.guildCache.size(),
                                 it.userCache.size(),
                                 context.bot.players.registry.values.count { m -> m.guild.jda == it }

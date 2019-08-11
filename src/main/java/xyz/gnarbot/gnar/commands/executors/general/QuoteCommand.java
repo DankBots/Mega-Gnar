@@ -1,7 +1,7 @@
 package xyz.gnarbot.gnar.commands.executors.general;
 
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.TextChannel;
 import xyz.gnarbot.gnar.commands.BotInfo;
 import xyz.gnarbot.gnar.commands.Command;
 import xyz.gnarbot.gnar.commands.CommandExecutor;
@@ -30,7 +30,7 @@ public class QuoteCommand extends CommandExecutor {
 
         for (String id : args) {
             final TextChannel _targetChannel = targetChannel;
-            context.getMessage().getChannel().getMessageById(id).queue(msg ->
+            context.getMessage().getChannel().retrieveMessageById(id).queue(msg ->
                     _targetChannel.sendMessage(new EmbedBuilder()
                             .setAuthor(msg.getAuthor().getName(), null, msg.getAuthor().getAvatarUrl())
                             .setDescription(msg.getContentDisplay())

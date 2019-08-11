@@ -1,7 +1,7 @@
 package xyz.gnarbot.gnar.commands.executors.general;
 
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Role;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
 import org.apache.commons.lang3.StringUtils;
 import xyz.gnarbot.gnar.commands.BotInfo;
 import xyz.gnarbot.gnar.commands.Command;
@@ -51,11 +51,11 @@ public class WhoIsCommand extends CommandExecutor {
                 .field("ID", true, member.getUser().getId())
                 .field("Status", true, StringUtils.capitalize(member.getOnlineStatus().getKey()))
 
-                .field("Creation Time", true, member.getUser().getCreationTime().format(DateTimeFormatter.RFC_1123_DATE_TIME))
-                .field("Join Date", true, member.getJoinDate().format(DateTimeFormatter.RFC_1123_DATE_TIME))
+                .field("Creation Time", true, member.getUser().getTimeCreated().format(DateTimeFormatter.RFC_1123_DATE_TIME))
+                .field("Join Date", true, member.getTimeJoined().format(DateTimeFormatter.RFC_1123_DATE_TIME))
 
                 .field("Nickname", true, member.getNickname() != null ? member.getNickname() : "No nickname.")
-                .field("Game", true, member.getGame() != null ? member.getGame().getName() : "No game.")
+                .field("Activity", true, !member.getActivities().isEmpty() ? member.getActivities().get(0).getName() : "No game.")
 
                 .field("Roles", true, roleStr)
 

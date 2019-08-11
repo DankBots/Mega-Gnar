@@ -1,6 +1,6 @@
 package xyz.gnarbot.gnar.commands.executors.music
 
-import net.dv8tion.jda.core.EmbedBuilder
+import net.dv8tion.jda.api.EmbedBuilder
 import xyz.gnarbot.gnar.commands.*
 import xyz.gnarbot.gnar.music.MusicManager
 import xyz.gnarbot.gnar.utils.desc
@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
 )
 class VoteSkipCommand : MusicCommandExecutor(true, true) {
     override fun execute(context: Context, label: String, args: Array<String>, manager: MusicManager) {
-        if (context.member.voiceState.isDeafened) {
+        if (context.member.voiceState!!.isDeafened) {
             context.send().error("You actually have to be listening to the song to start a vote.").queue()
             return
         }

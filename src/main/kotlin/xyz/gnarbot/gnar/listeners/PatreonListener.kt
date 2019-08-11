@@ -1,10 +1,11 @@
 package xyz.gnarbot.gnar.listeners
 
 import com.patreon.resources.Pledge
-import kotlinx.coroutines.experimental.launch
-import net.dv8tion.jda.core.entities.PrivateChannel
-import net.dv8tion.jda.core.events.message.priv.PrivateMessageReceivedEvent
-import net.dv8tion.jda.core.hooks.ListenerAdapter
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import net.dv8tion.jda.api.entities.PrivateChannel
+import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent
+import net.dv8tion.jda.api.hooks.ListenerAdapter
 import xyz.gnarbot.gnar.Bot
 import xyz.gnarbot.gnar.db.PatreonEntry
 import xyz.gnarbot.gnar.db.PremiumKey
@@ -35,7 +36,7 @@ class PatreonListener(private val bot: Bot) : ListenerAdapter() {
                 val name = parts.copyOfRange(1, parts.size).joinToString(" ")
 
                 event.channel.respond().info("Looking you up from the Patron list...").queue {
-                    launch {
+                    GlobalScope.launch {
                         val pledges = try {
                             getPledges()
                         } catch (e: IOException) {

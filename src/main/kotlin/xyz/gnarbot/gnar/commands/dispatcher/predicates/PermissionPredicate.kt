@@ -1,6 +1,6 @@
 package xyz.gnarbot.gnar.commands.dispatcher.predicates
 
-import net.dv8tion.jda.core.Permission
+import net.dv8tion.jda.api.Permission
 import xyz.gnarbot.gnar.commands.CommandExecutor
 import xyz.gnarbot.gnar.commands.Context
 import xyz.gnarbot.gnar.commands.Scope

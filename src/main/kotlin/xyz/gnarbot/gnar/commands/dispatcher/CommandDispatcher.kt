@@ -1,7 +1,7 @@
 package xyz.gnarbot.gnar.commands.dispatcher
 
-import net.dv8tion.jda.core.Permission
-import net.dv8tion.jda.core.exceptions.PermissionException
+import net.dv8tion.jda.api.Permission
+import net.dv8tion.jda.api.exceptions.PermissionException
 import xyz.gnarbot.gnar.Bot
 import xyz.gnarbot.gnar.commands.Command
 import xyz.gnarbot.gnar.commands.CommandExecutor
@@ -10,11 +10,12 @@ import xyz.gnarbot.gnar.commands.Context
 import xyz.gnarbot.gnar.commands.dispatcher.predicates.*
 import xyz.gnarbot.gnar.utils.Utils
 import java.util.concurrent.ExecutorService
+import java.util.function.BiPredicate
 
 class CommandDispatcher(private val bot: Bot, private val commandRegistry: CommandRegistry, private val executor: ExecutorService) {
     private val namePrefix = "${bot.configuration.name.toLowerCase()} "
 
-    private val predicates = listOf(
+    private val predicates = listOf<BiPredicate<CommandExecutor, Context>>(
             IgnoredPredicate(), // is the user ignored
             AdministratorPredicate(), // does the command require admin rights
             SettingsPredicate(), // command settings

@@ -1,7 +1,7 @@
 package com.jagrosh.jdautilities.menu
 
 import com.jagrosh.jdautilities.waiter.EventWaiter
-import net.dv8tion.jda.core.entities.Message
+import net.dv8tion.jda.api.entities.Message
 
 class SelectorBuilder(waiter: EventWaiter) : MenuBuilder<SelectorBuilder>(waiter) {
     private val options: MutableList<Selector.Entry> = mutableListOf()

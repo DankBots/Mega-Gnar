@@ -1,8 +1,7 @@
 package xyz.gnarbot.gnar.commands.executors.settings
 
-import net.dv8tion.jda.core.Permission
-import net.dv8tion.jda.core.entities.Channel
-import net.dv8tion.jda.core.entities.VoiceChannel
+import net.dv8tion.jda.api.Permission
+import net.dv8tion.jda.api.entities.VoiceChannel
 import xyz.gnarbot.gnar.commands.BotInfo
 import xyz.gnarbot.gnar.commands.Category
 import xyz.gnarbot.gnar.commands.Command
@@ -78,7 +77,7 @@ class MusicSettingsCommand : CommandTemplate() {
                         if (it.isEmpty()) append("None.")
 
                         it.mapNotNull(context.guild::getVoiceChannelById)
-                                .map(Channel::getName)
+                                .map(VoiceChannel::getName)
                                 .forEach { append("• ").append(it).append('\n') }
                     }
                 }

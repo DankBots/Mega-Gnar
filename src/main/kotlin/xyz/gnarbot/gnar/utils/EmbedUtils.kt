@@ -2,7 +2,7 @@
 @file:JvmName("EmbedUtils")
 package xyz.gnarbot.gnar.utils
 
-import net.dv8tion.jda.core.EmbedBuilder
+import net.dv8tion.jda.api.EmbedBuilder
 
 @JvmOverloads
 fun embed(title: String? = null): EmbedMaker = EmbedMaker().apply {

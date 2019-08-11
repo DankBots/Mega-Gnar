@@ -1,7 +1,7 @@
 @file:Suppress("NOTHING_TO_INLINE")
 package xyz.gnarbot.gnar.utils
 
-import net.dv8tion.jda.core.entities.Member
+import net.dv8tion.jda.api.entities.Member
 import ninja.leaping.configurate.ConfigurationNode
 import java.time.Duration
 import java.util.concurrent.TimeUnit

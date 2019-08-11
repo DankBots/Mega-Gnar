@@ -28,7 +28,7 @@ class MoveCommand : MusicCommandExecutor(false, false) {
             return
         }
 
-        if (targetChannel == context.selfMember.voiceState.channel) {
+        if (targetChannel == context.selfMember.voiceState?.channel) {
             context.send().error("That's the same channel.").queue()
             return
         }

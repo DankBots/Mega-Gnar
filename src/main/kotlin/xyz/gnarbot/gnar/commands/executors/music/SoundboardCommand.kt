@@ -1,15 +1,11 @@
 package xyz.gnarbot.gnar.commands.executors.music
 
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers
-import net.dv8tion.jda.core.Permission
 import org.apache.commons.lang3.StringUtils
 import xyz.gnarbot.gnar.commands.*
 import xyz.gnarbot.gnar.music.MusicLimitException
 import xyz.gnarbot.gnar.music.MusicManager
-import xyz.gnarbot.gnar.music.RepeatOption
 import xyz.gnarbot.gnar.music.TrackContext
-import xyz.gnarbot.gnar.utils.hasAnyRoleNamed
-import java.io.File
 
 @Command(
         aliases = ["playm", "sb", "sounds"],
@@ -41,7 +37,7 @@ class SoundboardCommand : CommandExecutor() {
 
 
         var distance = 999
-        var meme : String = ""
+        var meme = ""
         for (s in context.bot.soundManager.map.keys) {
             val dist = StringUtils.getLevenshteinDistance(s, args.joinToString())
             if(dist < distance) {

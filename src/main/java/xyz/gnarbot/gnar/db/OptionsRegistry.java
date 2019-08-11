@@ -1,6 +1,6 @@
 package xyz.gnarbot.gnar.db;
 
-import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.api.entities.Guild;
 import xyz.gnarbot.gnar.Bot;
 import xyz.gnarbot.gnar.db.guilds.GuildData;
 

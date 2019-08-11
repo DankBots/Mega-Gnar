@@ -1,8 +1,8 @@
 package xyz.gnarbot.gnar.utils.response
 
-import net.dv8tion.jda.core.entities.Message
-import net.dv8tion.jda.core.entities.MessageChannel
-import net.dv8tion.jda.core.requests.RestAction
+import net.dv8tion.jda.api.entities.Message
+import net.dv8tion.jda.api.entities.MessageChannel
+import net.dv8tion.jda.api.requests.RestAction
 import org.apache.commons.lang3.exception.ExceptionUtils
 import xyz.gnarbot.gnar.utils.EmbedProxy
 import xyz.gnarbot.gnar.utils.Utils

@@ -16,10 +16,10 @@ import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack
-import net.dv8tion.jda.core.Permission
-import net.dv8tion.jda.core.entities.Guild
-import net.dv8tion.jda.core.entities.TextChannel
-import net.dv8tion.jda.core.entities.VoiceChannel
+import net.dv8tion.jda.api.Permission
+import net.dv8tion.jda.api.entities.Guild
+import net.dv8tion.jda.api.entities.TextChannel
+import net.dv8tion.jda.api.entities.VoiceChannel
 import org.apache.http.client.config.CookieSpecs
 import org.apache.http.client.config.RequestConfig
 import xyz.gnarbot.gnar.Bot
@@ -154,7 +154,7 @@ class MusicManager(private val bot: Bot, val guild: Guild, val playerRegistry: P
 
     fun moveAudioConnection(channel: VoiceChannel) {
         guild.let {
-            if (!guild.selfMember.voiceState.inVoiceChannel()) {
+            if (!guild.selfMember.voiceState!!.inVoiceChannel()) {
                 throw IllegalStateException("Bot is not in a voice channel")
             }
 
@@ -182,7 +182,7 @@ class MusicManager(private val bot: Bot, val guild: Guild, val playerRegistry: P
     }
 
     fun isAlone(): Boolean {
-        return guild.selfMember.voiceState.channel?.members?.let {
+        return guild.selfMember.voiceState!!.channel?.members?.let {
             it.size == 1 && it[0] == guild.selfMember
         } != false
     }
@@ -206,7 +206,7 @@ class MusicManager(private val bot: Bot, val guild: Guild, val playerRegistry: P
     fun loadAndPlay(context: Context, trackUrl: String, trackContext: TrackContext, footnote: String? = null) {
         playerManager.loadItemOrdered(this, trackUrl, object : AudioLoadResultHandler {
             override fun trackLoaded(track: AudioTrack) {
-                if (!guild.selfMember.voiceState.inVoiceChannel()) {
+                if (!guild.selfMember.voiceState!!.inVoiceChannel()) {
                     if (!openAudioConnection(context.voiceChannel, context)) {
                         return
                     }
@@ -240,8 +240,8 @@ class MusicManager(private val bot: Bot, val guild: Guild, val playerRegistry: P
                     return
                 }
 
-                if (!guild.selfMember.voiceState.inVoiceChannel()) {
-                    if (!context.member.voiceState.inVoiceChannel()) {
+                if (!guild.selfMember.voiceState!!.inVoiceChannel()) {
+                    if (!context.member.voiceState!!.inVoiceChannel()) {
                         context.send().error("You left the channel before the track is loaded.").queue()
 
                         // Track is not supposed to load and the queue is empty

@@ -1,9 +1,9 @@
 package xyz.gnarbot.gnar.listeners
 
-import net.dv8tion.jda.core.events.guild.voice.GuildVoiceJoinEvent
-import net.dv8tion.jda.core.events.guild.voice.GuildVoiceLeaveEvent
-import net.dv8tion.jda.core.events.guild.voice.GuildVoiceMoveEvent
-import net.dv8tion.jda.core.hooks.ListenerAdapter
+import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent
+import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent
+import net.dv8tion.jda.api.events.guild.voice.GuildVoiceMoveEvent
+import net.dv8tion.jda.api.hooks.ListenerAdapter
 import xyz.gnarbot.gnar.Bot
 import xyz.gnarbot.gnar.utils.response.ResponseBuilder
 
@@ -15,10 +15,10 @@ class VoiceListener(private val bot: Bot) : ListenerAdapter() {
                 return
             }
 
-            val guild = event.guild ?: return
+            val guild = event.guild
 
             bot.players.getExisting(guild.idLong)?.let {
-                if (!it.guild.selfMember.voiceState.inVoiceChannel()) {
+                if (!it.guild.selfMember.voiceState!!.inVoiceChannel()) {
                     bot.players.destroy(guild.idLong)
                 } else if (it.isAlone()) {
                     it.queueLeave()
@@ -37,10 +37,10 @@ class VoiceListener(private val bot: Bot) : ListenerAdapter() {
                 return
             }
 
-            val guild = event.guild ?: return
+            val guild = event.guild
 
             bot.players.getExisting(guild.idLong)?.let {
-                if (!it.guild.selfMember.voiceState.inVoiceChannel()) {
+                if (!it.guild.selfMember.voiceState!!.inVoiceChannel()) {
                     bot.players.destroy(guild.idLong)
                 } else if (it.isAlone()) {
                     it.queueLeave()
@@ -52,12 +52,12 @@ class VoiceListener(private val bot: Bot) : ListenerAdapter() {
     override fun onGuildVoiceMove(event: GuildVoiceMoveEvent) {
         if (bot.isLoaded) {
             if (event.member.user == event.jda.selfUser) {
-                if (!event.guild.selfMember.voiceState.inVoiceChannel()) {
+                if (!event.guild.selfMember.voiceState!!.inVoiceChannel()) {
                     bot.players.destroy(event.guild.idLong)
                     return
                 }
 
-                if (event.channelJoined?.id == event.guild.afkChannel?.id) {
+                if (event.channelJoined.id == event.guild.afkChannel?.id) {
                     bot.players.destroy(event.guild.idLong)
                     return
                 }
@@ -88,10 +88,10 @@ class VoiceListener(private val bot: Bot) : ListenerAdapter() {
                 return
             }
 
-            val guild = event.guild ?: return
+            val guild = event.guild
 
             bot.players.getExisting(guild.idLong)?.let {
-                if (!event.guild.selfMember.voiceState.inVoiceChannel()) {
+                if (!event.guild.selfMember.voiceState!!.inVoiceChannel()) {
                     bot.players.destroy(event.guild.idLong)
                     return
                 } else if (it.isAlone()) {

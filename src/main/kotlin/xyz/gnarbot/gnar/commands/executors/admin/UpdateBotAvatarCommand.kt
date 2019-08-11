@@ -1,10 +1,9 @@
 package xyz.gnarbot.gnar.commands.executors.admin
 
-import net.dv8tion.jda.core.entities.Icon
+import net.dv8tion.jda.api.entities.Icon
 import xyz.gnarbot.gnar.commands.*
 import java.net.URL
 import kotlin.use
-import kotlin.io.use as doNotUse
 
 @Command(
         aliases = ["botAvatar"]

@@ -1,6 +1,6 @@
 package xyz.gnarbot.gnar.commands.executors.settings
 
-import net.dv8tion.jda.core.Permission
+import net.dv8tion.jda.api.Permission
 import xyz.gnarbot.gnar.commands.*
 import java.time.OffsetDateTime
 
@@ -44,7 +44,7 @@ class PruneCommand : CommandExecutor() {
 
         history.retrievePast(amount).queue {
             val messages = it.filter { msg ->
-                msg.creationTime.isAfter(time)
+                msg.timeCreated.isAfter(time)
             }
 
             when {

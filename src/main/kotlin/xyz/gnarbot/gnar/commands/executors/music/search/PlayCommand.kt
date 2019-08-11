@@ -19,7 +19,7 @@ class PlayCommand : CommandExecutor() {
     private val footnote = "You can search and pick results using _youtube or _soundcloud while in a channel."
 
     override fun execute(context: Context, label: String, args: Array<String>) {
-        val botChannel = context.selfMember.voiceState.channel
+        val botChannel = context.selfMember.voiceState?.channel
         val userChannel = context.voiceChannel
 
         if (botChannel != null && botChannel != userChannel) {

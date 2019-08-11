@@ -1,7 +1,7 @@
 package xyz.gnarbot.gnar.utils
 
-import net.dv8tion.jda.bot.sharding.ShardManager
-import net.dv8tion.jda.core.JDA
+import net.dv8tion.jda.api.JDA
+import net.dv8tion.jda.api.sharding.ShardManager
 import okhttp3.*
 import org.json.JSONObject
 import xyz.gnarbot.gnar.Bot

@@ -42,7 +42,6 @@ public class CommandRegistry {
         register(new InviteBotCommand());
         register(new PingCommand());
 //        register(new KaiperCommand());
-        register(new MathCommand());
         register(new RemindMeCommand());
 //        register(new GoogleCommand());
         register(new VideoCommand());

@@ -1,20 +1,19 @@
 package xyz.gnarbot.gnar.listeners;
 
 
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Role;
-import net.dv8tion.jda.core.events.*;
-import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
-import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.events.*;
+import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
+import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import xyz.gnarbot.gnar.Bot;
 import xyz.gnarbot.gnar.commands.Context;
 import xyz.gnarbot.gnar.db.guilds.GuildData;
 import xyz.gnarbot.gnar.music.MusicManager;
 
-import java.time.OffsetDateTime;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -68,7 +67,7 @@ public class BotListener extends ListenerAdapter {
                 }
 
                 // Add the role to the member
-                event.getGuild().getController().addSingleRoleToMember(event.getMember(), role).reason("Auto-role").queue();
+                event.getGuild().addRoleToMember(event.getMember(), role).reason("Auto-role").queue();
             }
         }
     }
@@ -81,7 +80,7 @@ public class BotListener extends ListenerAdapter {
 
     @Override
     public void onReady(ReadyEvent event) {
-        Bot.LOG.info("JDA " + (event.getJDA().getShardInfo() != null ? event.getJDA().getShardInfo().getShardId() : "instance") + " is ready.");
+        Bot.LOG.info("JDA " + event.getJDA().getShardInfo().getShardId() + " is ready.");
     }
 
     @Override

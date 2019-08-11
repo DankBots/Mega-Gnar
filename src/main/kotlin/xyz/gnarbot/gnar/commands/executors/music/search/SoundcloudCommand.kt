@@ -39,7 +39,7 @@ class SoundcloudCommand : xyz.gnarbot.gnar.commands.CommandExecutor() {
                 return@search
             }
 
-            val botChannel = context.selfMember.voiceState.channel
+            val botChannel = context.selfMember.voiceState?.channel
             val userChannel = context.voiceChannel
 
             if (!context.bot.configuration.musicEnabled || userChannel == null || botChannel != null && botChannel != userChannel) {
@@ -76,7 +76,7 @@ class SoundcloudCommand : xyz.gnarbot.gnar.commands.CommandExecutor() {
 
                     for (result in results) {
                         addOption("`${Utils.getTimestamp(result.info.length)}` **[${result.info.embedTitle}](${result.info.uri})**") {
-                            if (context.member.voiceState.inVoiceChannel()) {
+                            if (context.member.voiceState!!.inVoiceChannel()) {
                                 val manager = try {
                                     context.bot.players.get(context.guild)
                                 } catch (e: MusicLimitException) {

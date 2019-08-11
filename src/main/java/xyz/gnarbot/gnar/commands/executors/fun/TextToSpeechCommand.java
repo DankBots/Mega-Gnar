@@ -1,7 +1,7 @@
 package xyz.gnarbot.gnar.commands.executors.fun;
 
-import net.dv8tion.jda.core.MessageBuilder;
-import net.dv8tion.jda.core.Permission;
+import net.dv8tion.jda.api.MessageBuilder;
+import net.dv8tion.jda.api.Permission;
 import org.apache.commons.lang3.StringUtils;
 import xyz.gnarbot.gnar.commands.*;
 

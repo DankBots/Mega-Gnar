@@ -1,8 +1,8 @@
 package xyz.gnarbot.gnar.commands.executors.settings
 
-import net.dv8tion.jda.core.Permission
-import net.dv8tion.jda.core.entities.IMentionable
-import net.dv8tion.jda.core.entities.Role
+import net.dv8tion.jda.api.Permission
+import net.dv8tion.jda.api.entities.IMentionable
+import net.dv8tion.jda.api.entities.Role
 import xyz.gnarbot.gnar.commands.BotInfo
 import xyz.gnarbot.gnar.commands.Category
 import xyz.gnarbot.gnar.commands.Command

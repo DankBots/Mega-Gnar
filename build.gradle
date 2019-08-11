@@ -2,14 +2,8 @@ plugins {
     id 'java'
     id 'idea'
     id 'application'
-    id 'org.jetbrains.kotlin.jvm' version '1.2.30'
-    id 'com.github.johnrengelman.shadow' version '2.0.2'
-}
-
-String kotlinVersion = '1.2.30'
-
-static String kotlinModule(String module, String version) {
-    "org.jetbrains.kotlin:kotlin-$module:$version"
+    id 'org.jetbrains.kotlin.jvm' version '1.3.41'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 group 'xyz.gnarbot'
@@ -20,10 +14,6 @@ mainClassName = 'xyz.gnarbot.gnar.BotLoader'
 sourceCompatibility = 9
 targetCompatibility = 9
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.5'
-}
-
 repositories {
     jcenter()
     maven { url 'https://jitpack.io' }
@@ -32,8 +22,8 @@ repositories {
 
 dependencies {
     // Kotlin
-    compile kotlinModule("stdlib-jre8", kotlinVersion)
-    compile group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-core', version: '0.22.5'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-core', version: '1.2.2'
 
 //    compile kotlinModule("script-runtime", kotlinVersion)
 //    compile kotlinModule("script-util", kotlinVersion)
@@ -41,9 +31,11 @@ dependencies {
     compile group: 'org.codehaus.groovy', name: 'groovy-jsr223', version: '2.4.12'
 
     // JDA
-    compile group: 'net.dv8tion', name: 'JDA', version: '3.6.0_356'
-    compile group: 'com.sedmelluq', name: 'jda-nas', version: '1.0.5'
-    compile group: 'com.sedmelluq', name: 'lavaplayer', version: '1.2.63'
+    compile group: 'net.dv8tion', name: 'JDA', version: '4.BETA.0_38'
+    compile group: 'com.sedmelluq', name: 'jda-nas', version: '1.1.0'
+    compile group: 'com.sedmelluq', name: 'lavaplayer', version: '1.3.20'
+
+    //implementation 'com.github.DV8FromTheWorld:JDA:2adfdcaf54'
 
     // Configuration
     compile group: 'ninja.leaping.configurate', name: 'configurate-hocon', version: '3.3'
@@ -53,12 +45,8 @@ dependencies {
     compile group: 'com.rethinkdb', name: 'rethinkdb-driver', version: '2.3.3'
     compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.9.2'
 
-    // Math
-    compile group: 'xyz.avarel', name: 'aljava', version: '0.0.3'
-    compile group: 'org.scilab.forge', name: 'jlatexmath', version: '1.0.6'
-
     // Net stuff
-    compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.9.0'
+    compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.14.2'
     compile group: 'org.jsoup', name: 'jsoup', version: '1.10.3'
 
     // Libraries
@@ -70,34 +58,30 @@ dependencies {
 
     // Logger
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    
+    // Trove4J Specialized Implementations of Data Structures
+    compile group: 'net.sf.trove4j', name: 'trove4j', version: '3.0.3'
 
     // Riot API
     compile group: 'com.github.taycaldwell', name: 'riot-api-java', version: '4.0.1'
 
     // Test dependencies
-    testCompile group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit', version: '1.2.10'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
 compileJava.options.encoding = 'UTF-8'
 
 compileKotlin {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_1_9
+    targetCompatibility = JavaVersion.VERSION_1_9
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '9'
     }
 }
 
 jar {
     manifest {
         attributes 'Main-Class': mainClassName
-    }
-}
-
-kotlin {
-    experimental {
-        coroutines "enable"
     }
 }

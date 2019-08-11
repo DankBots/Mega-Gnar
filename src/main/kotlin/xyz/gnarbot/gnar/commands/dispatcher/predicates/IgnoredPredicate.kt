@@ -1,7 +1,7 @@
 package xyz.gnarbot.gnar.commands.dispatcher.predicates
 
-import net.dv8tion.jda.core.Permission
-import net.dv8tion.jda.core.entities.Member
+import net.dv8tion.jda.api.Permission
+import net.dv8tion.jda.api.entities.Member
 import xyz.gnarbot.gnar.commands.CommandExecutor
 import xyz.gnarbot.gnar.commands.Context
 import java.util.function.BiPredicate

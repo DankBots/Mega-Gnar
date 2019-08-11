@@ -39,8 +39,8 @@ class YoutubeCommand : xyz.gnarbot.gnar.commands.CommandExecutor() {
                 return@search
             }
 
-            val botChannel = context.selfMember.voiceState.channel
-            val userChannel = context.guild.getMember(context.message.author).voiceState.channel
+            val botChannel = context.selfMember.voiceState?.channel
+            val userChannel = context.guild.getMember(context.message.author)?.voiceState?.channel
 
             if (!context.bot.configuration.musicEnabled || userChannel == null || botChannel != null && botChannel != userChannel) {
                 context.send().embed {
@@ -76,7 +76,7 @@ class YoutubeCommand : xyz.gnarbot.gnar.commands.CommandExecutor() {
 
                     for (result in results) {
                         addOption("`${Utils.getTimestamp(result.info.length)}` **[${result.info.embedTitle}](${result.info.uri})**") {
-                            if (context.member.voiceState.inVoiceChannel()) {
+                            if (context.member.voiceState!!.inVoiceChannel()) {
                                 val manager = try {
                                     context.bot.players.get(context.guild)
                                 } catch (e: MusicLimitException) {

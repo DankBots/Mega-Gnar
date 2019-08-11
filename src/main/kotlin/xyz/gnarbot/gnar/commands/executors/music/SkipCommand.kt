@@ -1,6 +1,6 @@
 package xyz.gnarbot.gnar.commands.executors.music
 
-import net.dv8tion.jda.core.Permission
+import net.dv8tion.jda.api.Permission
 import xyz.gnarbot.gnar.commands.*
 import xyz.gnarbot.gnar.music.MusicManager
 import xyz.gnarbot.gnar.music.TrackContext

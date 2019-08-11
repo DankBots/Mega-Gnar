@@ -55,7 +55,7 @@ class JumpCommand : CommandTemplate() {
             return
         }
 
-        val botChannel = context.selfMember.voiceState.channel
+        val botChannel = context.selfMember.voiceState?.channel
         if (botChannel == null) {
             context.send().error("The bot is not currently in a channel.\n$PLAY_MESSAGE").queue()
             return

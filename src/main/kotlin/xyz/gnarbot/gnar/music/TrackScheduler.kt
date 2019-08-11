@@ -11,7 +11,7 @@ import xyz.gnarbot.gnar.utils.response.respond
 import java.util.*
 
 class TrackScheduler(private val bot: Bot, private val manager: MusicManager, private val player: AudioPlayer) : AudioEventAdapter() {
-    val queue: Queue<AudioTrack> = LinkedList<AudioTrack>()
+    val queue: Queue<AudioTrack> = LinkedList()
     var repeatOption = RepeatOption.NONE
     var lastTrack: AudioTrack? = null
         private set
@@ -72,9 +72,9 @@ class TrackScheduler(private val bot: Bot, private val manager: MusicManager, pr
     override fun onTrackStuck(player: AudioPlayer, track: AudioTrack, thresholdMs: Long) {
         track.getUserData(TrackContext::class.java).requestedChannel.let {
             manager.guild.getTextChannelById(it)
-        }.respond().error(
+        }?.respond()?.error(
                 "The track ${track.info.embedTitle} is stuck longer than ${thresholdMs}ms threshold."
-        ).queue()
+        )?.queue()
     }
 
     override fun onTrackException(player: AudioPlayer, track: AudioTrack, exception: FriendlyException) {
@@ -83,7 +83,7 @@ class TrackScheduler(private val bot: Bot, private val manager: MusicManager, pr
         }
         track.getUserData(TrackContext::class.java).requestedChannel.let {
             manager.guild.getTextChannelById(it)
-        }.respond().exception(exception).queue()
+        }?.respond()?.exception(exception)?.queue()
     }
 
     private fun announceNext(track: AudioTrack) {
@@ -106,5 +106,5 @@ class TrackScheduler(private val bot: Bot, private val manager: MusicManager, pr
         }
     }
 
-    fun shuffle() = Collections.shuffle(queue as List<*>)
+    fun shuffle() = (queue as MutableList<*>).shuffle()
 }

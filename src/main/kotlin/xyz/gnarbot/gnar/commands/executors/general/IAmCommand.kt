@@ -1,6 +1,6 @@
 package xyz.gnarbot.gnar.commands.executors.general
 
-import net.dv8tion.jda.core.entities.Role
+import net.dv8tion.jda.api.entities.Role
 import xyz.gnarbot.gnar.commands.BotInfo
 import xyz.gnarbot.gnar.commands.Command
 import xyz.gnarbot.gnar.commands.Context
@@ -26,7 +26,7 @@ class IAmCommand : CommandTemplate() {
             return context.send().error("You're already a ${role.asMention}.").queue()
         }
 
-        context.guild.controller.addSingleRoleToMember(context.member, role).queue()
+        context.guild.addRoleToMember(context.member, role).queue()
 
         context.send().info("You're now a ${role.asMention}.").queue()
 
@@ -42,7 +42,7 @@ class IAmCommand : CommandTemplate() {
             return context.send().error("You're not a ${role.asMention}.").queue()
         }
 
-        context.guild.controller.removeSingleRoleFromMember(context.member, role).queue()
+        context.guild.removeRoleFromMember(context.member, role).queue()
 
         context.send().info("You're no longer a ${role.asMention}.").queue()
     }

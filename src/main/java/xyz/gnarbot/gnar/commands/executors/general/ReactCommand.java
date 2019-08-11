@@ -1,6 +1,6 @@
 package xyz.gnarbot.gnar.commands.executors.general;
 
-import net.dv8tion.jda.core.entities.Emote;
+import net.dv8tion.jda.api.entities.Emote;
 import xyz.gnarbot.gnar.commands.BotInfo;
 import xyz.gnarbot.gnar.commands.Command;
 import xyz.gnarbot.gnar.commands.CommandExecutor;
@@ -24,7 +24,7 @@ public class ReactCommand extends CommandExecutor {
             return;
         }
 
-        context.getMessage().getChannel().getMessageById(args[0]).queue(msg -> {
+        context.getMessage().getChannel().retrieveMessageById(args[0]).queue(msg -> {
             if (context.getMessage().getEmotes().size() > 0) {
                 for (Emote em : context.getMessage().getEmotes()) {
                     msg.addReaction(em).queue();
