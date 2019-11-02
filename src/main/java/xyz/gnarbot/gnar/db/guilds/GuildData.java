@@ -34,6 +34,9 @@ public class GuildData extends ManagedObject {
     @JsonDeserialize(keyAs = String.class, contentAs = Long.class)
     private Map<String, Long> premiumKeys;
 
+    @JsonIgnore
+    public Object logData;
+
     @ConstructorProperties("id")
     public GuildData(String id) {
         super(id, "guilds_v2");
@@ -108,5 +111,6 @@ public class GuildData extends ManagedObject {
         ignoredData = null;
         musicData = null;
         roleData = null;
+        logData = null;
     }
 }

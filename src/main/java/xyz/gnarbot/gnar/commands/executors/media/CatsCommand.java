@@ -30,21 +30,17 @@ public class CatsCommand extends CommandExecutor {
                     case "png":
                     case "jpg":
                     case "gif":
-                        doc = db.parse("http://thecatapi.com/api/images/get?format=xml&type=" + args[0] + "&api_key="
-                                + apiKey + "&results_per_page=1");
-
+                        doc = db.parse("https://api.thecatapi.com/v1/images/search?mime_types=" + args[0] + "&api_key=" + apiKey);
                         break;
                     default:
                         context.send().error("Not a valid picture type. `[png, jpg, gif]`").queue();
                         return;
                 }
             } else {
-                doc = db.parse(new URL("http://thecatapi.com/api/images/get?format=xml&api_key=" + apiKey + "&results_per_page=1")
+                doc = db.parse(new URL("https://api.thecatapi.com/v1/images/search?api_key=" + apiKey)
                         .openStream());
             }
-
             String url = doc.getElementsByTagName("url").item(0).getTextContent();
-
             context.send().embed()
                     .setImage(url)
                     .action().queue();

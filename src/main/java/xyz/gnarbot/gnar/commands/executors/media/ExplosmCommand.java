@@ -22,7 +22,7 @@ public class ExplosmCommand extends CommandExecutor {
             Document document;
 
             int min = 1500;
-            int max = 4600;
+            int max = 5391;
 
             String rand;
 
@@ -61,7 +61,7 @@ public class ExplosmCommand extends CommandExecutor {
                     .action().queue();
 
         } catch (Exception e) {
-            context.send().error("Unable to grab Cyanide and Happiness comic.").queue();
+            context.send().error("Unable to grab Cyanide and Happiness comic, please try again").queue();
             e.printStackTrace();
         }
     }

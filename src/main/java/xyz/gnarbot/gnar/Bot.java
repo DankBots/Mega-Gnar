@@ -28,6 +28,10 @@ import xyz.gnarbot.gnar.utils.MyAnimeListAPI;
 import xyz.gnarbot.gnar.utils.SoundManager;
 
 import javax.security.auth.login.LoginException;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.function.Supplier;
 
@@ -38,6 +42,7 @@ public class Bot {
     private final Supplier<Configuration> configurationGenerator;
     private Configuration configuration;
 
+    private final Bot bot = this; //strictly there for counter
     private final Database database;
     private final OptionsRegistry optionsRegistry;
     private final PlayerRegistry playerRegistry;
@@ -49,7 +54,7 @@ public class Bot {
     private final CommandDispatcher commandDispatcher;
     private final EventWaiter eventWaiter;
     private final ShardManager shardManager;
-    private final CountUpdater countUpdater;
+    private CountUpdater countUpdater;
     private final SoundManager soundManager;
 
     public Bot(
@@ -91,9 +96,19 @@ public class Bot {
                 .setBulkDeleteSplittingEnabled(false)
                 .build();
 
-        countUpdater = new CountUpdater(this, shardManager);
-
         shardManager.addEventListener();
+
+
+        //Added this as a quick fix as the other system only updated shard 0.
+        Timer timer = new Timer(900000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                System.out.println("Running");
+                countUpdater = new CountUpdater(bot, shardManager);
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
 
         LOG.info("The bot is now connecting to Discord.");
 
@@ -104,6 +119,7 @@ public class Bot {
         discordFM = new DiscordFM(this);
 
         patreon = new PatreonAPI(credentials.getPatreonToken());
+        System.out.println("Patreon Established.");
 
         myAnimeListAPI = new MyAnimeListAPI(credentials.getMalUsername(), credentials.getMalPassword());
         String riotApiKey = credentials.getRiotAPIKey();
@@ -125,9 +141,9 @@ public class Bot {
         return shardManager;
     }
 
-    public CountUpdater getCountUpdater() {
-        return countUpdater;
-    }
+    //public CountUpdater getCountUpdater() {
+    //    return countUpdater;
+    //}
 
     public Guild getGuildById(long id) {
         return getJDA(MiscUtil.getShardForGuild(id, credentials.getTotalShards())).getGuildById(id);

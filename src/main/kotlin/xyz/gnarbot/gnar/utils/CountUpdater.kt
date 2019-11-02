@@ -6,6 +6,7 @@ import okhttp3.*
 import org.json.JSONObject
 import xyz.gnarbot.gnar.Bot
 import java.io.IOException
+import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
@@ -13,11 +14,10 @@ import java.util.concurrent.TimeUnit
 class CountUpdater(private val bot: Bot, shardManager: ShardManager) {
     val client: OkHttpClient = OkHttpClient.Builder().build()
     val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
+    var index = 0
 
     init {
-        shardManager.shardCache.forEachIndexed { index, jda ->
-            executor.scheduleAtFixedRate({ update(jda) }, 10L + index * 5, 30, TimeUnit.MINUTES)
-        }
+        executor.scheduleAtFixedRate({ for(shard in shardManager.shards) { update(shard); index++ } }, 10L + index * 5, 30, TimeUnit.MINUTES)
     }
 
     fun shutdown() {
@@ -30,7 +30,7 @@ class CountUpdater(private val bot: Bot, shardManager: ShardManager) {
         Bot.LOG.info("Sending shard updates for shard ${jda.shardInfo.shardId}")
         updateCarbonitex(jda)
         updateAbal(jda)
-        updateDiscordBots(jda)
+        //updateDiscordBots(jda)
     }
 
     private fun createCallback(name: String, jda: JDA): Callback {
@@ -46,6 +46,8 @@ class CountUpdater(private val bot: Bot, shardManager: ShardManager) {
         }
     }
 
+    //About this one - may or may not be banned from here :)))))))
+    /*
     private fun updateDiscordBots(jda: JDA) {
         val auth = bot.credentials.discordBots ?: return
 
@@ -64,18 +66,18 @@ class CountUpdater(private val bot: Bot, shardManager: ShardManager) {
                 .build()
 
         client.newCall(request).enqueue(createCallback("discordbots.org", jda))
-    }
+    }*/
 
     private fun updateAbal(jda: JDA) {
         val auth = bot.credentials.abal ?: return
 
         val json =  JSONObject()
-                .put("server_count", jda.guildCache.size())
+                .put("shards", jda.guildCache.size())
                 .put("shard_id", jda.shardInfo.shardId)
                 .put("shard_count", bot.credentials.totalShards)
 
         val request = Request.Builder()
-                .url("https://bots.discord.pw/api/bots/201503408652419073/stats")
+                .url("https://top.gg/api/bots/138481382794985472/stats")
                 .header("User-Agent", "Gnar Bot")
                 .header("Authorization", auth)
                 .header("Content-Type", "application/json")
@@ -83,7 +85,7 @@ class CountUpdater(private val bot: Bot, shardManager: ShardManager) {
                 .post(RequestBody.create(HttpUtils.JSON, json.toString()))
                 .build()
 
-        client.newCall(request).enqueue(createCallback("bots.discord.pw", jda))
+        client.newCall(request).enqueue(createCallback("top.gg", jda))
     }
 
     private fun updateCarbonitex(jda: JDA) {
