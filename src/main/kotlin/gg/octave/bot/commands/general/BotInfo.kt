@@ -36,7 +36,7 @@ class BotInfo : Cog {
         var guilds = 0L
         var users = 0L
 
-        Database.getDefaultJedisPool().resource.use {
+        Launcher.database.jedisPool.resource.use {
             for(x in 0 until Launcher.credentials.totalShards) {
                 val stats = JSONObject(it.hget("stats", x.toString()));
                 guilds += stats.getLong("guild_count")

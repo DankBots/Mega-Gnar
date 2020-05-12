@@ -26,7 +26,7 @@ class PatreonAPI(var accessToken: String?) {
     }
 
     fun sweep(): CompletableFuture<SweepStats> {
-        val storedPledges = Launcher.db.premiumUsers
+        val storedPledges = Launcher.db.getPremiumUsers()
 
         return fetchPledges().thenApply { pledges ->
             val total = storedPledges.size

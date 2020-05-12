@@ -30,13 +30,12 @@ class StatsPoster(botId: String) {
 
     fun postEvery(time: Long, unit: TimeUnit) {
         scheduler.scheduleWithFixedDelay({
-            var guilds = 0L
-            Database.getDefaultJedisPool().resource.use { jedis ->
-                guilds = (0 until Launcher.credentials.totalShards)
-                        .map { jedis.hget("stats", it.toString()) }
-                        .map(::JSONObject)
-                        .map { it.getLong("guild_count") }
-                        .sum()
+            val guilds = Launcher.database.jedisPool.resource.use { jedis ->
+                (0 until Launcher.credentials.totalShards)
+                    .map { jedis.hget("stats", it.toString()) }
+                    .map(::JSONObject)
+                    .map { it.getLong("guild_count") }
+                    .sum()
             }
 
             update(guilds)

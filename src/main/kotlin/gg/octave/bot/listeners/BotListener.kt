@@ -123,11 +123,11 @@ class BotListener : EventListener {
     }
 
     private fun postStats(jda: JDA) {
-        Database.getDefaultJedisPool().resource.use {
+        Launcher.database.jedisPool.resource.use {
             it.hset("stats", jda.shardInfo.shardId.toString(), JSONObject()
-                    .put("guild_count", jda.guildCache.size())
-                    .put("cached_users", jda.userCache.size())
-                    .toString()
+                .put("guild_count", jda.guildCache.size())
+                .put("cached_users", jda.userCache.size())
+                .toString()
             )
         }
     }
