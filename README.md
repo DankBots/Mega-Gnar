@@ -1,4 +1,4 @@
-<img align="right" src="https://octave.gg/assets/img/logo.png" height="250" width="250">
+<img align="right" src="https://i.ytimg.com/vi/Ppuists6RV0/hqdefault.jpg" height="180" width="240">
 
 # Octave [![License](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](LICENSE) [![Chat](https://img.shields.io/badge/chat-discord-blue.svg?style=flat-square)](https://discord.gg/musicbot)
 **Octave** is an open-source Discord bot written in Java and Kotlin, using JDA and Lavaplayer.
